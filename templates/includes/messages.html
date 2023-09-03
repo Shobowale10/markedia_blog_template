@@ -1,0 +1,13 @@
+{% if messages %} 
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{message.tags}}">
+                {% if message.tags == "error" %}
+                    <i class='fa-solid fa-circle-exclamation'></i>
+                {% elif message.tags == "success" %}
+                    <i class="fa-solid fa-circle-check"></i>
+                {% endif %}
+                {{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}

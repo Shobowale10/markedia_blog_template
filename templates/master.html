@@ -1,0 +1,237 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Site Metas -->
+    <title>{% block title %}{% endblock%}</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="{% static 'markedia/images/favicon.ico'%}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'markedia/images/apple-touch-icon.png'%}">
+    
+    <!-- Design fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet"> 
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'markedia/css/bootstrap.css'%}" rel="stylesheet">
+
+    <!-- FontAwesome Icons core CSS -->
+    <link href="{% static 'markedia/css/font-awesome.min.css'%}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'markedia/style.css'%}" rel="stylesheet">
+
+    <!-- Animate styles for this template -->
+    <link href="{% static 'markedia/css/animate.css'%}" rel="stylesheet">
+
+    <!-- Responsive styles for this template -->
+    <link href="{% static 'markedia/css/responsive.css'%}" rel="stylesheet">
+
+    <!-- Colors for this template -->
+    <link href="{% static 'markedia/css/colors.css'%}" rel="stylesheet">
+
+    <!-- Version Marketing CSS for this template -->
+    <link href="{% static 'markedia/css/version/marketing.css'%}" rel="stylesheet">
+    
+    <link href="{% static 'markedia/fontawesome-free-6.2.0-web/css/all.min.css'%}" rel="stylesheet">
+</head>
+
+<body>
+    <header class="market-header header">
+        <div class="container-fluid">
+            <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="marketing-index.html"><img src="images/version/market-logo.png" alt=""></a>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/markedia/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/markedia/category/marketing">Marketing</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/markedia/category/make-money">Make Money</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/markedia/blog">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/markedia/contact">Contact Us</a>
+                        </li>
+                    </ul>
+                    <form action="/markedia/search" class="form-inline">
+                        <input class="form-control mr-sm-2" type="text" value="{% if search_item %}{{ search_item }}{% endif %}" name="search" placeholder="How may I help?">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        </div><!-- end container-fluid -->
+    </header><!-- end market-header -->
+
+
+        {% block content %}
+        {% endblock %}
+
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <h2 class="widget-title">Recent Posts</h2>
+                            <div class="blog-list-widget">
+                                <div class="list-group">
+                                    {% for recentPosts in recentPosts %}
+                                        <a href="/markedia/details/{{ recentPosts.slug }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <img src="{{ recentPosts.image.url }}" alt="" class="img-fluid float-left">
+                                                <h5 class="mb-1">{{ recentPosts.title }}</h5>
+                                                <small>{{ recentPosts.date }}</small>
+                                            </div>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div><!-- end blog-list -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <h2 class="widget-title">Popular Posts</h2>
+                            <div class="blog-list-widget">
+                                <div class="list-group">
+                                    {% for popularPosts in popularPosts %}
+                                        <a href="/markedia/details/{{ popularPosts.slug }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <div class="w-100 justify-content-between">
+                                                <img src="{{ popularPosts.image.url }}" alt="" class="img-fluid float-left">
+                                                <h5 class="mb-1">{{ popularPosts.title }}</h5>
+                                                <span class="rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </span>
+                                            </div>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div><!-- end blog-list -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <h2 class="widget-title">Popular Categories</h2>
+                            <div class="link-widget">
+                                <ul>
+                                    {% for x in categoryList %}
+                                        <li><a href="/markedia/category/{{ x.slug }}">{{ x.name }} <span>({{ x.nblog }})</span></a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div><!-- end link-widget -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <br>
+                        <br>
+                        <div class="copyright">&copy; Markedia. Design: <a href="http://shobowalelanre.com.ng">LarryCodes Design</a>.</div>
+                    </div>
+                </div>
+            </div><!-- end container -->
+        </footer><!-- end footer -->
+
+        <div class="dmtop">Scroll to Top</div>
+    </div><!-- end wrapper -->
+
+
+    <!-- Core JavaScript
+    ================================================== -->
+    <script src="{% static 'markedia/js/jquery.min.js' %}"></script>
+    <script src="{% static 'markedia/js/tether.min.js' %}"></script>
+    <script src="{% static 'markedia/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'markedia/js/animate.js' %}"></script>
+    <script src="{% static 'markedia/js/custom.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // VALIDATE EMAIL BEFORE ADDING TO EMAIL LIST
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var mail = document.getElementById("subscribeMail");
+        var mailbutton = document.getElementById("subscribeBtn");
+        var mailErr = document.getElementById("subscribeErr");
+        var subscribeEmail = new FormData();
+        mailErr.style.marginTop = "-15px";
+        mailErr.style.marginBottom = "10px";
+        mailErr.style.display = "none";
+        mailErr.style.textAlign = "left";
+
+        $(document).on('click', '#subscribeBtn', function(e) {
+            // VALIDATE EMAIL
+            if (mail.value !== "") {
+                if (mail.value.match(mailformat) == null) {
+                    mailErr.style.display = "block";
+                    mailErr.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please enter a valid email!';
+
+                } else {
+                    subscribeEmail.append('email', $('#subscribeMail').val());
+                    subscribeEmail.append('action', 'subscribe');
+                    subscribeEmail.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{% url "subscribe" %}',
+                        data: subscribeEmail,
+                        cache: false,
+                        processData: false,
+                        contentType: false,
+                        enctype: 'multipart/form-data',
+                        success: function (data){
+                            if (data.subscribed == 1) {
+                                mailErr.style.display = "block";
+                                mailErr.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> This email has already been registered!';
+            
+                            } else {
+                                mail.value = "";
+                                mailErr.style.color = "#fff";
+                                mailErr.style.display = "block";
+                                mailErr.innerHTML = "<b style='color:'#fff';'>Subscription Sucessful!</b>";
+                                setTimeout(() => {
+                                    mailErr.innerHTML = "";
+                                    mail.innerHTML = "";
+                                    mailErr.style.display = "none";
+                                }, 3000)
+                            }
+                        },error: function (xhr, errmsg, err) {
+                            console.log(xhr.status + ":" + xhr.responseText);
+                        }
+                    });
+                    
+                }
+            } else {
+                emailCorrect = 0;
+                mailErr.style.display = "block";
+                mailErr.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please enter your email address!';
+            }
+        })
+    </script>
+    {% block js %}{% endblock %}
+</body>
+</html>

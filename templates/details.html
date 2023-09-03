@@ -1,0 +1,420 @@
+{% extends 'markedia/master.html' %}
+{% load static %}
+
+{% block title %}
+    {{ details.title }} - Markedia Marketing Blog
+{% endblock %}
+
+
+{% block content %}
+    <div id="wrapper">
+        <section class="section lb m3rem">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-title-area">
+                                <ol class="breadcrumb hidden-xs-down">
+                                    <li class="breadcrumb-item"><a href="/markedia/">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="/markedia/blog">Blog</a></li>
+                                    <li class="breadcrumb-item active">{{ details.title }}</li>
+                                    <input type="hidden" value="{{details.id}}" id="getid">
+                                </ol>
+
+                                <span class="color-yellow"><a href="/markedia/category/{{ postCategory.slug }}" title="">{{ details.category }}</a></span>
+
+                                <h3>{{ details.title }}</h3>
+
+                                <div class="blog-meta big-meta">
+                                    <small><span title="">{{ details.date }}</span></small>
+                                    <small><a href="/markedia/author/{{ authorDetail.slug}}" title="">by {{ details.author }}</a></small>
+                                    <small><span title=""><i class="fa fa-eye"></i> {{ details.views}}</span></small>
+                                </div><!-- end meta -->
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <div class="single-post-media">
+                                <img src="{{ details.image.url }}" alt="Post Image" class="img-fluid">
+                            </div><!-- end media -->
+
+                            <div class="blog-content">  
+                                {{ details.details | safe }}
+                            </div><!-- end content -->
+
+                            <div class="blog-title-area">
+                                <div class="tag-cloud-single">
+                                    <span>Tags</span>
+                                    <small><a href="#" title="">lifestyle</a></small>
+                                    <small><a href="#" title="">colorful</a></small>
+                                    <small><a href="#" title="">trending</a></small>
+                                    <small><a href="#" title="">another tag</a></small>
+                                </div><!-- end meta -->
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="banner-spot clearfix">
+                                        <div class="banner-img">
+                                            <img src="{% static 'markedia/upload/banner_01.jpg' %}" alt="" class="img-fluid">
+                                        </div><!-- end banner-img -->
+                                    </div><!-- end banner -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+
+                            <hr class="invis1">
+
+                            <div class="custombox authorbox clearfix">
+                                <h4 class="small-title">About author</h4>
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <img src="{{ authorDetail.image.url }}" alt="" class="img-fluid rounded-circle"> 
+                                    </div><!-- end col -->
+                                
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <h4><a href="/markedia/author/{{ authorDetail.slug }}">{{ authorDetail.user }}</a></h4>
+                                        <p><a href="/markedia/author/{{ authorDetail.slug }}">See more about {{ authorDetail.user | capfirst}} </a> <br> Thanks for stop Markedia!</p>
+
+                                        <div class="topsocial">
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Website"><i class="fa fa-link"></i></a>
+                                        </div><!-- end social -->
+
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                            </div><!-- end author-box -->
+
+                            <hr class="invis1">
+
+                            <div class="custombox clearfix">
+                                <h4 class="small-title">You may also like</h4>
+                                <div class="row">
+                                    {% for x in morePosts %}
+                                        <div class="col-lg-6">
+                                            <div class="blog-box">
+                                                <div class="post-media">
+                                                    <a href="/markedia/details/{{ x.slug }}" title="">
+                                                        <img src="{{ x.image.url }}" alt="" class="img-fluid">
+                                                        <div class="hovereffect">
+                                                            <span class=""></span>
+                                                        </div><!-- end hover -->
+                                                    </a>
+                                                </div><!-- end media -->
+                                                <div class="blog-meta">
+                                                    <h4><a href="/markedia/details/{{ x.slug }}" title="">{{ x.title }}</a></h4>
+                                                    <small><a href="markedia/category/{{ x.category }}" title="">{{ x.category }}</a></small>
+                                                    <small><a title="">{{ x.date }}</a></small>
+                                                </div><!-- end meta -->
+                                            </div><!-- end blog-box -->
+                                        </div><!-- end col -->
+                                    {% endfor %}
+                                </div><!-- end row -->
+                            </div><!-- end custom-box -->
+
+                            <hr class="invis1">
+
+                            <div class="custombox clearfix" id="form-head">
+                                <h4 class="small-title">Leave a Reply</h4>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h2 id="reply">Comment Sent</h2>
+
+                                        <div class="form-wrapper">
+                                            <section>
+                                                <input type="text" class="form-control" id="name" placeholder="Your name">
+                                                <p class="text-danger error" id="nameErr"></p>
+                                            </section>
+
+                                            <section>
+                                                <input type="text" class="form-control" id="email" placeholder="Email address">
+                                                <p class="text-danger error" id="emailErr"></p>
+                                            </section>
+                                            
+                                            <section>
+                                                <input type="text" class="form-control" id="website" placeholder="Website">
+                                                <p class="text-danger error" id="websiteErr"></p>
+                                            </section>
+
+                                            <section>
+                                                <textarea class="form-control" id="comment" placeholder="Your comment"></textarea>
+                                                <p class="text-danger error" id="commentErr"></p>
+                                            </section>
+
+                                            <section>
+                                                <button type="submit" id="submit" class="btn btn-primary">Submit Comment</button>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="invis1">
+
+                            <div class="custombox clearfix" id="comment-container">
+                                <h4 class="small-title"><span id="comment-count">{{ count }}</span> Comments</h4>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="comments-list" id="comments-list">
+                                            {% if allComments %}
+                                                {% for x in allComments %}
+                                                    <div class="media">
+                                                        <a class="media-left">
+                                                            <img src="{% static '/markedia/upload/author.jpg' %}" alt="" class="rounded-circle">
+                                                        </a>
+
+                                                        <div class="media-body">
+                                                            <h4 class="media-heading user_name">{{ x.name }} <small>{{ x.date_created }}</small></h4>
+                                                            <p>{{ x.comment }}</p>
+                                                            <a href="#" class="btn btn-primary btn-sm">Reply</a>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                                
+                                            {% else %}
+                                                <div id="noComment">
+                                                    <section class="d-flex justify-content-center">
+                                                        <img src="{% static 'markedia/images/emotion-sad-line.png' %}" alt="" width="auto" height="40px">
+                                                    </section>
+
+                                                    <p class="text-center">Be the first to Comment</p>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                            </div><!-- end custom-box -->
+                        </div><!-- end page-wrapper -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sidebar">
+                            <div class="widget-no-style">
+                                <div class="newsletter-widget text-center align-self-center">
+                                    <h3>Subscribe Today!</h3>
+                                    <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
+                                    <div class="form-inline">
+                                        <input type="text" name="email" id="subscribeMail" placeholder="Add your email here.." required class="form-control" />
+                                        <p class="text-danger" id="subscribeErr"></p>
+                                        <input type="submit" value="Subscribe" id="subscribeBtn" class="btn btn-default btn-block text-center" />
+                                    </div>         
+                                </div><!-- end newsletter -->
+                            </div>
+
+                            <div class="widget">
+                                <h2 class="widget-title">Recent Posts</h2>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        {% for sidebarPosts in sidebarPosts %}
+                                            <a href="/markedia/details/{{ sidebarPosts.slug }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                <div class="w-100 justify-content-between">
+                                                    <img src="{{ sidebarPosts.image.url }}" alt="" class="img-fluid float-left">
+                                                    <h5 class="mb-1">{{ sidebarPosts.title }}</h5>
+                                                    <small>{{ sidebarPosts.date }}</small>
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+
+                            <div id="" class="widget">
+                                <h2 class="widget-title">Advertising</h2>
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                        <img src="{% static 'markedia/upload/banner_03.jpg' %}" alt="" class="img-fluid">
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <h2 class="widget-title">Instagram Feed</h2>
+                                <div class="instagram-wrapper clearfix">
+                                    <a class="" href="#"><img src="{% static 'markedia/upload/small_09.jpg' %}" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="{% static 'markedia/upload/small_01.jpg' %}" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="{% static 'markedia/upload/small_02.jpg' %}" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="{% static 'markedia/upload/small_03.jpg' %}" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="{% static 'markedia/upload/small_04.jpg' %}" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="{% static 'markedia/upload/small_05.jpg' %}" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="{% static 'markedia/upload/small_06.jpg' %}" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="{% static 'markedia/upload/small_07.jpg' %}" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="{% static 'markedia/upload/small_08.jpg' %}" alt="" class="img-fluid"></a>
+                                </div><!-- end Instagram wrapper -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <h2 class="widget-title">Popular Categories</h2>
+                                <div class="link-widget">
+                                    <ul>
+                                        {% for x in categoryList %}
+                                            <li><a href="/markedia/category/{{ x.slug }}">{{ x.name }} <span>({{ x.nblog }})</span></a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div><!-- end link-widget -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            // Errors
+            var nameErr = document.getElementById("nameErr");
+            var emailErr = document.getElementById("emailErr");
+            var websiteErr = document.getElementById("websiteErr");
+            var commentErr = document.getElementById("commentErr");
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+            function isValidUrl(string) {
+                try {
+                  new URL(string);
+                  return true;
+                } catch (err) {
+                  return false;
+                }
+            }
+
+            
+            const date = new Date();
+            const media = document.getElementsByClassName("media");
+            var formData = new FormData();
+            var post_id = document.getElementById("getid").value;
+            var nameCorrect = 1; var email = 1; var website = 1; var commentInput = 1;
+
+            // VALIDATE DATA BEFORE SENDING
+            $(document).on('click', '#submit', function(e) {
+                document.getElementById('form-head').scrollIntoView();
+
+                // VALIDATE NAME
+                    if ($('#name').val() === "") {
+                        send = 0;
+                        nameCorrect = 0;
+                        nameErr.style.display = "block";
+                        nameErr.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please enter your Name!';
+                    } else {
+                        nameCorrect = 1;
+                        nameErr.style.display = "none";
+                        nameErr.innerHTML = '';
+                    }
+
+                 // VALIDATE EMAIL
+                    if ($('#email').val() != "") {
+                        if ($('#email').val().match(mailformat) == null) {
+                            email = 0;
+                            emailErr.style.display = "block";
+                            emailErr.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please enter a valid email!';
+                        } else {
+                            email = 1;
+                            emailErr.style.display = "none";
+                            emailErr.innerHTML = '';
+                        }
+                    }
+
+                // VALIDATE URL
+                    if ($('#website').val() != "") {
+                        if (isValidUrl($('#website').val()) == false) {
+                            website = 0;
+                            websiteErr.style.display = "block";
+                            websiteErr.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please enter a valid URL!';
+                        } else {
+                            website = 1;
+                            websiteErr.style.display = "none";
+                            websiteErr.innerHTML = '';
+                        }
+                    }
+
+                // VALIDATE COMMENTS
+                    if ($('#comment').val() === "") {
+                        commentInput = 0;
+                        commentErr.style.display = "block";
+                        commentErr.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i> Please enter a Comment!';
+                    } else {
+                        commentInput = 1;
+                        commentErr.style.display = "none";
+                        commentErr.innerHTML = '';
+                    }
+
+                    if (nameCorrect === 1 & email === 1 & website === 1 & commentInput === 1) {
+                        formData.append('name', $('#name').val());
+                        formData.append('email', $('#email').val());
+                        formData.append('post_id', $('#getid').val());
+                        formData.append('website', $('#website').val());
+                        formData.append('comment', $('#comment').val());
+                        formData.append('action', 'comment');
+                        formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+                        
+                        $.ajax({
+                            type: 'POST',
+                            url: '{% url "comment" %}',
+                            data: formData,
+                            cache: false,
+                            processData: false,
+                            contentType: false,
+                            enctype: 'multipart/form-data',
+                            success: function (data){
+                                document.getElementById('reply').style.display = "block";
+                                if (data.allComments) {
+                                    updateComments(data.allComments);
+                                    document.getElementById('comment-container').scrollIntoView();
+                                }
+                            },error: function (xhr, errmsg, err) {
+                                console.log(xhr.status + ":" + xhr.responseText);
+                            }
+                        });
+    
+                        document.getElementById("name").value= "";
+                        document.getElementById("email").value= "";
+                        document.getElementById("website").value= "";
+                        document.getElementById("comment").value= "";
+                        setTimeout(() => {
+                            document.getElementById('reply').style.display = "none";
+                        }, 2000);
+                    }
+            })
+            
+
+
+            function updateComments(allComments) {
+                $("#comments-list:first-child").prepend(`
+                    <div class="media">
+                        <a class="media-left" href="#">
+                            <img src="{% static 'markedia/upload/author.jpg' %}' %}" alt="" class="rounded-circle">
+                        </a>
+
+                        <div class="media-body">
+                            <h4 class="media-heading user_name">${allComments.name } <small>Just Now</small></h4>
+                            <p>${allComments.comment }</p>
+                            <a href="#" class="btn btn-primary btn-sm">Reply</a>
+                        </div>
+                    </div>
+                `)
+
+                var countSpan = document.getElementById("comment-count").innerHTML;
+                count = parseInt(countSpan) + 1;
+                document.getElementById("comment-count").innerHTML = count;
+                var nocommnet = document.getElementById("noComment");
+                if (nocommnet) {
+                    nocommnet.style.display = "none";
+                }
+            }
+        </script>
+{% endblock %}

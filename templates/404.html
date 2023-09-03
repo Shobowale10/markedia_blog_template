@@ -1,0 +1,52 @@
+{% extends 'markedia/master.html' %}
+{% load static %}
+
+{% block title %}
+    404 Page Not Found - Markedia Marketing Blog
+{% endblock %}
+
+
+{% block content %}
+    <div id="wrapper">
+        <div class="page-title db">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <h2>Contact <small class="hidden-xs-down hidden-sm-down">Nulla felis eros, varius sit amet volutpat non. </small></h2>
+                    </div><!-- end col -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/markedia/index">Home</a></li>
+                            <li class="breadcrumb-item"><a href="/markedia/index">Pages</a></li>
+                            <li class="breadcrumb-item active">404</li>
+                        </ol>
+                    </div><!-- end col -->                    
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end page-title -->
+
+        <section class="section lb">
+            <div class="container">
+                <div class="row">    
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="text-center">
+                                        <i class="ri-emotion-unhappy-line ri-5x"></i>
+                                        <h1><span style="color: #ffb900">{{ page_name | capfirst }}</span> Not Found .</h1>
+                                        <p>The page you are tring to access does not exist.</p>
+
+                                        <a href="/markedia/"><button class="btn btn-outline-success my-2 my-sm-0" type="button">Go back to Home</button></a>
+                                    </div>
+                                </div>
+                            </div><!-- end row -->
+
+                            <hr class="invis">
+                        </div><!-- end page-wrapper -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+{% endblock %}
+

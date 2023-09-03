@@ -1,0 +1,176 @@
+{% extends 'markedia/master.html' %}
+
+
+{% block title %}
+    Search  - Markedia Marketing Blog
+{% endblock %}
+
+
+{% block content %}
+    <div id="wrapper">
+        <div class="page-title db">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                        <h2>Search <small class="hidden-xs-down hidden-sm-down">{{ search_item | capfirst }}</small></h2>
+                    </div><!-- end col -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/markedia/">Home</a></li>
+                            <li class="breadcrumb-item"><a>Search</a></li>
+                            <li class="breadcrumb-item active">{{ search_item | capfirst }}</li>
+                        </ol>
+                    </div><!-- end col -->                    
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </div><!-- end page-title -->
+    
+        <section class="section lb">
+            <div class="container">
+                <div class="row"> 
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-custom-build">
+                                {% if postCount > 0 %}
+                                    {% for x in post_list %}
+                                        <div class="blog-box wow fadeIn">
+                                            <div class="post-media">
+                                                <a href="/markedia/details/{{ x.slug }}" title="">
+                                                    <img src="{{ x.image.url }}" alt="" class="img-fluid">
+                                                    <div class="hovereffect">
+                                                        <span></span>
+                                                    </div>
+                                                    <!-- end hover -->
+                                                </a>
+                                            </div>
+                                            <!-- end media -->
+                                            <div class="blog-meta big-meta text-center">
+                                                <div class="post-sharing">
+                                                    <ul class="list-inline">
+                                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                                    </ul>
+                                                </div><!-- end post-sharing -->
+                                                <h4><a href="/markedia/details/{{ x.slug }}" title="">{{ x.title }}</a></h4>
+                                                <p>
+                                                    {{ x.details | safe | slice:":250"}}
+                                                ...</p>
+                                                <small><a href="/markedia/category/{{ x.category }}" title="">{{ x.category }}</a></small>
+                                                <small><a title="">{{x.date}}</a></small>
+                                                <small><a title="">by {{x.author}}</a></small>
+                                                <small><a title=""><i class="fa fa-eye"></i> {{x.post_views}}</a></small>
+                                            </div><!-- end meta -->
+                                        </div><!-- end blog-box -->
+
+                                        <hr class="invis">
+                                    {% endfor %}
+                                {% else %} 
+                                    <div class="text-center">
+                                        <i class="ri-emotion-unhappy-line ri-5x"></i>
+                                        <h1>No Post found for <span style="color: #ffb900">{{ search_item | capfirst }}</span>.</h1>
+                                        <a href="/markedia/"><button class="btn btn-outline-success my-2 my-sm-0" type="button">Go back to Home</button></a>
+                                  </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <hr class="invis">
+
+                        {% if post_list.has_other_pages %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="pagination justify-content-center">
+                                            {% if post_list.has_previous %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/markedia/?page={{ post_list.previous_page_number }}">Previous</a>
+                                                </li>
+                                            {% endif %}
+                                            <li class="page-item"><a class="page-link" href="/markedia/?page=1">1</a></li>
+                                            <li class="page-item"><a class="page-link" href="/markedia/?page=2">2</a></li>
+                                            <li class="page-item"><a class="page-link" href="/markedia/?page=3">3</a></li>
+                                            {% if  post_list.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/markedia/?page={{ post_list.next_page_number }}">Next</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+                        {% endif %}
+                    </div><!-- end col -->
+
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sidebar">
+                            <div class="widget-no-style">
+                                <div class="newsletter-widget text-center align-self-center">
+                                    <h3>Subscribe Today!</h3>
+                                    <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
+                                    <div class="form-inline">
+                                        <input type="text" name="email" id="subscribeMail" placeholder="Add your email here.." required class="form-control" />
+                                        <p class="text-danger" id="subscribeErr"></p>
+                                        <input type="submit" value="Subscribe" id="subscribeBtn" class="btn btn-default btn-block text-center" />
+                                    </div>         
+                                </div><!-- end newsletter -->
+                            </div>
+
+                            <div class="widget">
+                                <h2 class="widget-title">Recent Posts</h2>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+                                        {% for sidebarPosts in sidebarPosts %}
+                                            <a href="/markedia/details/{{ sidebarPosts.slug }}" class="list-group-item list-group-item-action flex-column align-items-start">
+                                                <div class="w-100 justify-content-between">
+                                                    <img src="{{ sidebarPosts.image.url }}" alt="" class="img-fluid float-left">
+                                                    <h5 class="mb-1">{{ sidebarPosts.title }}</h5>
+                                                    <small>{{ sidebarPosts.date }}</small>
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+
+                            <div id="" class="widget">
+                                <h2 class="widget-title">Advertising</h2>
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                        <img src="upload/banner_03.jpg" alt="" class="img-fluid">
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <h2 class="widget-title">Instagram Feed</h2>
+                                <div class="instagram-wrapper clearfix">
+                                    <a class="" href="#"><img src="upload/small_09.jpg" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_01.jpg" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_02.jpg" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_03.jpg" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_04.jpg" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_05.jpg" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_06.jpg" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_07.jpg" alt="" class="img-fluid"></a>
+                                    <a href="#"><img src="upload/small_08.jpg" alt="" class="img-fluid"></a>
+                                </div><!-- end Instagram wrapper -->
+                            </div><!-- end widget -->
+
+                            <div class="widget">
+                                <h2 class="widget-title">Popular Categories</h2>
+                                <div class="link-widget">
+                                    <ul>
+                                        {% for x in categoryList %}
+                                            <li><a href="/markedia/category/{{ x.slug }}">{{ x.name }} <span>({{ x.nblog }})</span></a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </div><!-- end link-widget -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+{% endblock %}
